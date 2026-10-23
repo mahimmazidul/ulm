@@ -20,7 +20,7 @@ def main(debug: bool, version: bool):
         click.echo(f"ulm v{__version__}")
 
 
-for _name in ("dl", "wvd", "kv", "env", "cfg"):
+for _name in ("dl", "wvd", "prd", "kv", "env", "cfg"):
     _command = commands.load(_name)
     if callable(_command):
         main.add_command(_command)
