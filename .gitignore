@@ -1,0 +1,34 @@
+# secrets & runtime state — never commit
+pat_token
+*.token
+*.pat
+key_store.db
+cookies/
+cookies.*.txt
+WVDs/
+PRDs/
+DCSL/
+cache/
+temp/
+watchers/
+.pids/
+CONFs/
+exports/
+logs/
+wireproxy
+*.ush
+.download-manifest
+.ush-manifest
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# editors / os
+.DS_Store
+.idea/
+.vscode/

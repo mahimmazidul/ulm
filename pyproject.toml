@@ -1,0 +1,51 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ulm"
+version = "6.0.0"
+description = "🪶 Light on RAM. Fast to finish. Made to run anywhere."
+authors = [{ name = "mahimmazidul" }]
+requires-python = ">=3.9"
+readme = "README.md"
+license = "GPL-3.0-only"
+keywords = ["python", "downloader", "drm", "widevine", "ulm"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: OS Independent",
+    "Topic :: Multimedia :: Video",
+    "Topic :: Security :: Cryptography",
+]
+
+# Deliberately small. Manifest parsing (HLS/DASH/ISM), MP4 box logic,
+# progress rendering, and vault handling are implemented inside the
+# package: fewer deps = less RAM + fewer install surprises on mobile.
+dependencies = [
+    "click>=8.0,<9",
+    "requests>=2.28,<3",
+    "PyYAML>=6.0,<7",          # optional at runtime, needed for configs
+    "pysubs2>=1.6,<2",
+    "pywidevine>=1.8.0",       # pulls: protobuf, pycryptodomex, pymp4, requests
+    "pyplayready>=0.6,<1",
+]
+
+[project.optional-dependencies]
+ip = ["aiohttp>=3.9,<4"]  # optional geofence ip-lookup helper
+
+[project.scripts]
+ulm = "ulm.core.__main__:main"
+unshackle = "ulm.core.__main__:main"  # compat alias
+
+[tool.hatch.build.targets.wheel]
+packages = ["ulm", "unshackle"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
